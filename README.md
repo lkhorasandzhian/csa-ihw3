@@ -2,7 +2,7 @@
 
 ## Выполненные критерии на 4 балла
 
-### Код на C (файл 4variant.c):
+### Код на C (файл [4variant.c](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_4/4variant.c)):
 
 ```c
 #include <stdio.h>
@@ -50,19 +50,19 @@ int main(int argc, char *argv[]) {
 Пояснения к программе:
 В начале программы производится проверка на кол-во аргументов, введённых в консоль. Если передано НЕ 2 аргумента (в коде написано != 3, потому что при запуске с пустой командной линией argc = 1), программа досрочно завершается с сообщением об ошибке. От пользователя требуется вводить сначала вещественное число x, а потом через пробел целое число m. Например, '0.123 12' (без кавычек). В самой программе выполняется проверка на корректность ввода вещественного числа: оно должно быть в диапазоне (-1; 1), иначе - преждевременный выход. Дабы избежать излишних нагромождений в виде функция по типу factorial и пр., я ввёл "накопительные" переменные (такого термина нет, но назвал их так, потому что с каждым шагом в цикле они возрастают и приобретают необходимое значение с учётом предыдущих умножений). Такими являются m_multiplier, x_multiplier и factorial. Более того, в этом случае на каждом шаге не придётся произоводить n операций умножения, а сразу за одну операцию умножения получать необходимый на i-ом шаге результат. Далее немного о цикле: в начале стоит условие выхода (когда мы добъёмся необходимой нам точности), далее, если точность нам не подошла, то мы считаем значения для "накопительных" переменных, перекидываем текущее значение в предыдущее, а к самому текущему значению прибавляем произведение накопительных переменных xMultiplier и mMultiplier, делённое на factorial. После получения необходимой нам точности мы выйдем из цикла и выведем текущий элемент на экран.
 
-### Стандартная компиляция программы (получим файл 4variant.s):
+### Стандартная компиляция программы (получим файл [4variant.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_4/assembly-usual/4variant.s)):
 
 ```sh
 gcc -O0 -Wall -masm=intel -S 4variant.c -o 4variant.s
 ```
 
-### Компиляция программы с оптимизацией (получим файл 4variant_optimized.s):
+### Компиляция программы с оптимизацией (получим файл [4variant_optimized.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_4/assembly_optimized/4variant_optimized.s)):
 
 ```sh
 gcc -O0 -Wall -masm=intel -S -fno-asynchronous-unwind-tables -fcf-protection=none 4variant.c -o 4variant_optimized.s
 ```
 
-### Тестовое покрытие (демонстрация эквивалентности функционирования программ 4variant.s и 4variant_optimized.s):
+### Тестовое покрытие (демонстрация эквивалентности функционирования программ [4variant.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_4/assembly-usual/4variant.s) и [4variant_optimized.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_4/assembly_optimized/4variant_optimized.s)):
 | Input data                 | usual                      | optimized                  |
 |----------------------------|----------------------------|----------------------------|
 | *empty*                    | *exception message 1*      | *exception message 1*      |
@@ -72,7 +72,7 @@ gcc -O0 -Wall -masm=intel -S -fno-asynchronous-unwind-tables -fcf-protection=non
 
 ## Выполненные критерии на 5 баллов
 
-### Комментарии к 4variant_func_optimized.s - фрагмент 1:
+### Комментарии к [4variant_func_optimized.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_5/4variant_func_optimized.s) - фрагмент 1:
 
 ```assembly
 powerTaylorSeries:
@@ -82,7 +82,7 @@ powerTaylorSeries:
 	mov	DWORD PTR -60[rbp], edi		# int m = edi. (Приём входных данны)
 ```
 
-### Комментарии к 4variant_func_optimized.s - фрагмент 2:
+### Комментарии к [4variant_func_optimized.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_5/4variant_func_optimized.s) - фрагмент 2:
 
 ```assembly
 	movsd	xmm0, QWORD PTR -16[rbp]	# xmm0 = double current. (Возврат выходных данных)
@@ -97,7 +97,7 @@ powerTaylorSeries:
 	ret
 ```
 
-### Комментарии к 4variant_func_optimized.s - фрагмент 3:
+### Комментарии к [4variant_func_optimized.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_5/4variant_func_optimized.s) - фрагмент 3:
 
 ```assembly
 	mov	edx, DWORD PTR -20[rbp]		# edx = int m. (m - main'овая)
@@ -111,7 +111,7 @@ powerTaylorSeries:
 
 ## Выполненные критерии на 6 баллов
 
-### Код на C с регистрами (файл 4variant_reg.c):
+### Код на C с регистрами (файл [4variant_reg.c](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_6/4variant_reg.c)):
 
 ```c
 #include <stdio.h>
@@ -170,12 +170,12 @@ int main(int argc, char *argv[]) {
 Каждая локальная переменная была переписана в формате: register 'TYPE' 'NAME' asm("'REGISTER_NAME'").
 Решил не приписывать комментарии в очевидных местах, как я написал выше.
 
-### Сопоставление размеров объектных файлов 4variant.o и 4variant_reg_optimized.o
+### Сопоставление размеров объектных файлов [4variant.o](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_4/assembly-usual/4variant.o) и [4variant_reg_optimized.o](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_6/4variant_reg_optimized.o)
 | 4variant.o          | 4variant\_reg\_optimized |
 |---------------------|--------------------------|
 | 2,7 кБ (2 728 байт) | 2,5 кБ (2 528 байт)      |
 
-### Тестовое покрытие (демонстрация эквивалентности функционирования программ 4variant.s и 4variant_reg_optimized.s):
+### Тестовое покрытие (демонстрация эквивалентности функционирования программ [4variant.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_4/assembly-usual/4variant.s) и [4variant_reg_optimized.s](https://github.com/lkhorasandzhian/csa-ihw3/blob/main/grade_6/4variant_reg_optimized.s)):
 | Input data                 | usual                      | with registers                  |
 |----------------------------|----------------------------|---------------------------------|
 | *empty*                    | *exception message 1*      | *exception message 1*           |
